@@ -1,7 +1,5 @@
 const MessageEmbed = require("discord.js").MessageEmbed;
 
-const wiki = require("wikijs").default;
-
 let ui = (message) => {
   let person = message.mentions.members.first();
 
@@ -114,48 +112,4 @@ let pfp = (message) => {
   }
 };
 
-let wikiSearch = async (message, args) => {
-  let page = await wiki()
-    .page(args)
-    .catch((err) => {
-      let embed = new MessageEmbed()
-        .setAuthor(
-          `Wikipedia`,
-          "https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png"
-        )
-        .setTitle(`Could not find a Wikipedia article on ${args}`);
-
-      message.channel.send(embed).catch(console.error);
-      return;
-    });
-
-  let sections = await page.sections();
-  let summary = await page.summary();
-  let url = await page.url();
-  let mainImage;
-  mainImage = await page.mainImage().catch((err) => console.log(err));
-  console.log(mainImage)
-
-  let embed = new MessageEmbed()
-    .setAuthor(
-      `Wikipedia`,
-      "https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png"
-    )
-    .setColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`)
-    .setDescription(summary.split(".")[0])
-    .setThumbnail(mainImage)
-    .setFooter(url)
-    .setTimestamp();
-
-  for (let i = 0; i < sections.length; i++) {
-    if (sections[i].content == "") continue;
-    sections[i].content = sections[i].content.split(".")[0];
-    if (sections[i].content.length > 1024) continue;
-
-    embed.addField(sections[i].title, sections[i].content);
-  }
-
-  message.channel.send(embed).catch(console.error);
-};
-
-module.exports = { ui, si, pfp, wikiSearch };
+module.exports = { ui, si, pfp };

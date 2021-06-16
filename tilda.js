@@ -78,7 +78,6 @@ client.on("message", (message) => {
     "~si": () => info.si(message),
     "~8ball": () => basic.eightBall(message, args),
     "~roll": () => basic.roll(message, args),
-    "~wiki": () => info.wikiSearch(message, args, client),
     "~leaderboard": () => coin.leaderboard(message),
     "~l": () => COMMANDS["~leaderboard"](),
     "~flip": () => coin.continueUser(message, args, "flip"),

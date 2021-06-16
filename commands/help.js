@@ -87,13 +87,18 @@ let editEmbed = (helpEmbed, message, num, color) => {
       embed
         .setDescription("Info Commands")
         .addField(
-          "~suggest [message]",
-          `Sends <@340002869912666114> a message with your idea to improve Tilda`,
+          "~ui @person",
+          `Gives user info on yourself or whoever you pinged`,
           false
         )
         .addField(
-          "~8ball [question]",
-          `Ask the all powerful 8ball your questions`,
+          "~si",
+          `Gives basic server information`,
+          false
+        )
+        .addField(
+          "~pfp @person",
+          `Gives you the pfp of yourself or whoever you pinged`,
           false
         );
       break;
